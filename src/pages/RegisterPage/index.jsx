@@ -19,11 +19,21 @@ const schema = z.object({
   password: z
     .string()
     .nonempty({ message: 'Senha é obrigatória' })
-    .min(8, { message: 'Senha deve ter no mínimo 8 caracteres' }),
+    .min(8, { message: 'Senha deve ter no mínimo 8 caracteres' })
+    .refine(password => 
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).*$/.test(password), {
+      message: 'Senha deve ter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial',
+    }),
+  passwordConfirmation: z.string().nonempty({ message: 'Confirmação de senha é obrigatória' }),
   bio: z.string().nonempty({ message: 'Bio é obrigatória' }),
   contact: z.string().nonempty({ message: 'Contato é obrigatório' }),
   course_module: z.string().nonempty({ message: 'Selecione um módulo' }),
+})
+.refine(data => data.password === data.passwordConfirmation, {
+  message: 'Senha e confirmação de senha devem ser iguais',
+  path: ['passwordConfirmation'],
 });
+
 
 const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
@@ -59,14 +69,14 @@ const onSubmit = async (data) => {
       <img src={logo} alt="Logo" />
       <Button type="button" text="Voltar" variant="back" />
       </LogoContainer>
-      <FormContainer style={{ height: '62.5rem' }}>
+      <FormContainer style={{ height: '68.75rem' }}>
       <StyledH1 style={{ textAlign: 'center', marginBottom: '1rem' }}>Crie sua conta</StyledH1>
       <Headline style={{ textAlign: 'center' }}>Rapido e grátis, vamos nessa</Headline>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input register={register} label="Nome" id="name" type="text" placeholder="Digite aqui seu nome" errors={errors} />
         <Input register={register} label="Email" id="email" type="email" placeholder="Digite aqui seu email" errors={errors} />
         <Input register={register} label="Senha" id="password" type="password" placeholder="Digite aqui sua senha" errors={errors} />
-        <Input register={register} label="Confirmar Senha" id="password1" type="password1" placeholder="Digite novamente sua senha" errors={errors} />
+        <Input register={register} label="Confirmar Senha" id="passwordConfirmation" type="password" placeholder="Digite novamente sua senha" errors={errors} />
         <Input register={register} label="Bio" id="bio" type="text" placeholder="Fale sobre você" errors={errors} />
         <Input register={register} label="Contato" id="contact" type="text" placeholder="Opções de contato" errors={errors} />
         <StyledLabel htmlFor="course_module">Selecione o módulo</StyledLabel>

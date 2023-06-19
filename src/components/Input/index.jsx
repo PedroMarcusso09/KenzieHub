@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledInput, StyledLabel, InputContainer } from '../../styles/Input';
+import { StyledInput, StyledLabel, InputContainer } from '../../styles/input';
 
 const Input = ({ register, label, id, type, placeholder, errors }) => (
   <InputContainer>

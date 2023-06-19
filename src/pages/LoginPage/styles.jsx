@@ -27,7 +27,7 @@ export const LogoImage = styled.img`
 
 export const FormContainer = styled.div`
   width: 23.0625rem;
-  height: 31.375rem;
+  height: 32.8125rem;
   border-radius: 0.25rem;
   padding: 2.625rem 1.375rem;
   padding-top: 1rem;
@@ -36,12 +36,19 @@ export const FormContainer = styled.div`
 
   @media (max-width: 400px) {
     width: 18.5rem;
-    height: 312.5rem;
+    height: 31.25rem;
   }
-
 `;
+
+export const FormContainerWrapper = styled.div`
+  ${({ hasErrors }) => hasErrors && css`
+    height: auto;
+  `}
+`;
+
 
 export const Container = styled.div`
   display: grid;
   grid-gap: 2rem;
+  margin-top: 1rem;
 `;

@@ -7,7 +7,7 @@ import axios from 'axios';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { HeadlineBold, StyledH1 } from '../../styles/typography';
-import { FormContainer, MainContainer, LogoContainer, LogoImage, Container } from './styles';
+import { FormContainer,   MainContainer, LogoContainer, LogoImage, Container, FormContainerWrapper } from './styles';
 import logo from '../../assets/logo.svg';
 
 const schema = z.object({
@@ -54,6 +54,7 @@ const LoginPage = () => {
       <LogoContainer>
         <LogoImage src={logo} alt="Logo" />
       </LogoContainer>
+      <FormContainerWrapper data-has-errors={Object.keys(errors).length > 0}>
       <FormContainer>
         <form onSubmit={handleSubmit(onSubmit)}>
           <StyledH1 style={{ textAlign: 'center' }}>Login</StyledH1>
@@ -81,6 +82,7 @@ const LoginPage = () => {
           </Container>
         </form>
       </FormContainer>
+      </FormContainerWrapper>
     </MainContainer>
   );
 };

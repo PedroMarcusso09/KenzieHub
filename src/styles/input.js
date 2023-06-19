@@ -23,6 +23,7 @@ export const StyledInput = styled.input`
     font: 400 normal 1rem/1.625rem "Inter";
     color: var(--color-grey-0);
     margin-bottom: .5rem;
+    margin-top: .5rem;
 
     &:focus {
         outline: none;
