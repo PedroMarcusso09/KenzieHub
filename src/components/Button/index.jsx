@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { StyledButtonPrimary, StyledButtonSignup, StyledButtonBack, StyledButtonExit } from '../../styles/button';
+import { StyledButtonPrimary, StyledButtonSignup, StyledButtonBack, StyledButtonExit, StyledButtonAdd, StyledButtonEsc, StyledButtonSave } from '../../styles/button';
 
 const Button = ({ type, text, disabled, onClick, to, variant, preventDefault = false }) => {
   let ButtonComponent;
@@ -18,6 +18,15 @@ const Button = ({ type, text, disabled, onClick, to, variant, preventDefault = f
     case 'exit':
       ButtonComponent = StyledButtonExit;
       break;
+      case 'add':
+      ButtonComponent = StyledButtonAdd;
+      break;
+      case 'esc':
+        ButtonComponent = StyledButtonEsc;
+        break;
+        case 'save':
+          ButtonComponent = StyledButtonSave;
+          break;
     default:
       ButtonComponent = StyledButtonPrimary;
       break;

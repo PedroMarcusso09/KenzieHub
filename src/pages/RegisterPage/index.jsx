@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { toast } from 'react-toastify';
+import { UserContext } from '../../providers/UserContext';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { Headline, StyledH1 } from '../../styles/typography';
@@ -11,7 +11,6 @@ import { StyledSelect, StyledLabel } from '../../styles/select';
 import { MainContainer, FormContainer } from '../LoginPage/styles';
 import { LogoContainer } from './styles';
 import logo from '../../assets/logo.svg';
-
 
 const schema = z.object({
   name: z.string().nonempty({ message: 'Nome é obrigatório' }),
@@ -34,34 +33,16 @@ const schema = z.object({
   path: ['passwordConfirmation'],
 });
 
-
 const RegisterPage = () => {
-  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(schema)
   });
 
-const instance = axios.create({
-  baseURL: 'https://kenziehub.herokuapp.com',
-  timeout: 1000,
-});
+  const { registerUser, loading } = useContext(UserContext);
 
-const onSubmit = async (data) => {
-  setLoading(true);
-  try {
-    await instance.post('/users', data);
-    toast.success("Conta criada com sucesso!");
-    window.location.href = '/';
-  } catch (err) {
-    if (err.response && err.response.data.message === 'Email already exists') {
-      toast.error("Este e-mail já foi registrado. Por favor, use um diferente.");
-    } else {
-      toast.error("Ops! Algo deu errado.");
-    }
-  } finally {
-    setLoading(false);
-  }
-};
+  const onSubmit = (data) => {
+    registerUser(data, toast, '/');
+  };
 
   return (
     <MainContainer>
@@ -87,7 +68,7 @@ const onSubmit = async (data) => {
           <option value="Quarto módulo (Backend Avançado)">Quarto módulo</option>
           {errors.course_module && <p>{errors.course_module.message}</p>}
         </StyledSelect>
-        <Button type="submit" text="Cadastrar" disabled={loading} variant="primary" />
+        <Button type="submit" text="Cadastrar" disabled={loading} />
         {loading && <p>Carregando...</p>}
       </form>
       </FormContainer>

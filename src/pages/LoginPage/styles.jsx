@@ -37,6 +37,10 @@ export const FormContainer = styled.div`
   @media (max-width: 400px) {
     width: 18.5rem;
     height: 31.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 `;
 

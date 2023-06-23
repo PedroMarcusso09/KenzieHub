@@ -1,22 +1,27 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Form from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import DashboardPage from '../pages/DashboardPage';
+import { UserContext } from '../providers/UserContext'; 
 
 const AppRoutes = () => {
-  const [userData, setUserData] = useState(null);
+  const { PrivateRoute } = useContext(UserContext);
 
   return (
     <Routes>
       <Route
         path="/"
-        element={<Form setUserData={setUserData} />}
+        element={<Form />}
       />
       <Route path="/register" element={<RegisterPage />} />
       <Route
         path="/dashboard"
-        element={<DashboardPage userData={userData} setUserData={setUserData} />}
+        element={
+          <PrivateRoute>
+            <DashboardPage />
+          </PrivateRoute>
+        }
       />
     </Routes>
   );

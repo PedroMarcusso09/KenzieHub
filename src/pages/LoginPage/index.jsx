@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import axios from 'axios';
+import { UserContext } from '../../providers/UserContext';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { HeadlineBold, StyledH1 } from '../../styles/typography';
-import { FormContainer,   MainContainer, LogoContainer, LogoImage, Container, FormContainerWrapper } from './styles';
+import { FormContainer, MainContainer, LogoContainer, LogoImage, Container, FormContainerWrapper } from './styles';
 import logo from '../../assets/logo.svg';
 
 const schema = z.object({
@@ -20,29 +20,11 @@ const LoginPage = () => {
     resolver: zodResolver(schema)
   });
 
-  const [loading, setLoading] = useState(false);
+  const { loginUser, loading } = useContext(UserContext);
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    setLoading(true);
-    try {
-      const res = await axios.post('https://kenziehub.herokuapp.com/sessions', data);
-      localStorage.setItem('@TOKEN', res.data.token);
-      localStorage.setItem('@USERID', res.data.user.id);
-
-      const userRes = await axios.get(`https://kenziehub.herokuapp.com/users/${res.data.user.id}`, {
-        headers: {
-          Authorization: `Bearer ${res.data.token}`
-        }
-      });
-
-      localStorage.setItem('@USERDATA', JSON.stringify(userRes.data));
-
-      navigate('/dashboard'); 
-    } catch (err) {
-      console.log(err.message || 'Algo deu errado');
-    }
-    setLoading(false);
+    loginUser(data, navigate);
   };
 
   const handleSignupClick = () => {

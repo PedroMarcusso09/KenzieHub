@@ -14,7 +14,7 @@ export const GlobalStyles = createGlobalStyle`
 	--color-negative: #e83f5b;
 }
 
-body {
+html {
 	background-color: var(--color-grey-4);
 }
 

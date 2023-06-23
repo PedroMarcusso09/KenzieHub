@@ -20,7 +20,7 @@ export const StyledSelect = styled.select`
     padding: .8rem .5rem 0 .5rem;
 
     @media (max-width: 400px) {
-    width: 15.5625rem;
+    width: 13.5rem;
     height: 3.125rem;
   }
 `;

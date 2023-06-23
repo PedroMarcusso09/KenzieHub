@@ -34,3 +34,21 @@ export const ParagraphStyles3 = css`
 export const Headline2 = styled.p`
   ${ParagraphStyles3};
 `;
+
+export const ParagraphStyles4 = css`
+    font: 600 normal 1rem/1.125rem "Inter";
+    color: var(--color-grey-0);
+`
+
+export const Headline3 = styled.p`
+  ${ParagraphStyles4};
+`;
+
+export const ParagraphStyles5 = css`
+    font: 700 normal 0.875rem/1.5rem "Inter";
+    color: var(--color-grey-0);
+`
+
+export const Headline4 = styled.p`
+  ${ParagraphStyles5};
+`;
