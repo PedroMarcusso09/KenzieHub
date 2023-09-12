@@ -7,5 +7,5 @@
 
 ## Tecnologias utilizadas
 - HTML
-- REACT
+- React
 - Styled-Components
