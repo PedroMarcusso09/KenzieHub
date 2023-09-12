@@ -8,4 +8,4 @@
 - React
 - Styled-Components
 
-### :computer: Link da página do projeto: [CLIQUE AQUI](https://wear-take-146sdk34r-pedromarcusso09.vercel.app/) 
+### :computer: Link da página do projeto: [CLIQUE AQUI](https://react-entrega-kenzie-hub-pedro-marcusso09-43n6zhm1f.vercel.app/) 
